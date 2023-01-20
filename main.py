@@ -8,7 +8,7 @@ from adafruit_motor import stepper
 import board
 import pwmio
 from analogio import AnalogIn, AnalogOut 
-
+from ulab import numpy as np
 
 
 coils =[
@@ -23,15 +23,36 @@ for coil in coils:
 pot = analogio.AnalogIn(board.A0)
 
 pwm = pwmio.PWMOut(board.D7, duty_cycle=2 ** 15, frequency=50)
-#motor = stepper.StepperMotor(coils[0], coils[1], coils[2], coils[3], microsteps=None)
+motor = stepper.StepperMotor(coils[0], coils[1], coils[2], coils[3], microsteps=None)
 
 
-def stepperAdditionMultiplier(xPotentiometer):
-    rVal = simpleio.map_range(xPotentiometer,0,65535,-10,10)
-    return rVal if rVal != 0.166168 or 0.156403 else rVal
-    
+def stepperAdditionMultiplier(xPotentiometer,xRng,yRng):
+    rVal = simpleio.map_range(xPotentiometer,0,65535,xRng,yRng)
+    return 9.9 if rVal < .2 and rVal > -.2 else 0 if rVal < yRng/5 and rVal > xRng/5 else rVal, 
+
+runningMedian = []
+
+def pushToMed(x):
+    runningMedian.append(x)
+    if len(runningMedian) == 6:
+        runningMedian.pop(0)
+    return median(runningMedian)
+
+def median(input):
+    input.sort()
+    length = math.floor(len(input)/2)
+    return input[length]
+     
+
 
 while True:
-    #print(pot.value)
-    print(stepperAdditionMultiplier(pot.value))
-    time.sleep(.05)
+    
+    # push the most recent value to runningMedian
+    # pop the oldest from the front of runningMedian if there's more than some number of elements there
+    # compute the median of runningMedian and store it in a var for this loop
+    
+    print(f"med:{runningMedian},smothedVal:{pushToMed(stepperAdditionMultiplier(pot.value,-10,10))} ")
+
+    time.sleep(.005)
+    motor.onestep()
+
