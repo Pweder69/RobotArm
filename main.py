@@ -39,9 +39,11 @@ def pushToMed(x):
     return median(runningMedian)
 
 def median(input):
-    input.sort()
-    length = math.floor(len(input)/2)
-    return input[length]
+    sortedArray = input
+    sortedArray.sort()
+    print(sortedArray)
+    length = math.floor(len(sortedArray)/2)
+    return sortedArray[length]
      
 
 
@@ -53,6 +55,6 @@ while True:
     
     print(f"med:{runningMedian},smothedVal:{pushToMed(stepperAdditionMultiplier(pot.value,-10,10))} ")
 
-    time.sleep(.005)
-    motor.onestep()
+    time.sleep(.05)
+   # motor.onestep()
 
