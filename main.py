@@ -3,12 +3,10 @@ import math
 import simpleio
 import analogio
 import digitalio
-import adafruit_motor
 from adafruit_motor import stepper
 import board
 import pwmio
 from analogio import AnalogIn, AnalogOut 
-from ulab import numpy as np
 
 
 coils =[
@@ -31,7 +29,8 @@ def stepperAdditionMultiplier(xPotentiometer,xRng,yRng):
     return 10 if rVal < .2 and rVal > -.2 else 1 if rVal < yRng/5 and rVal > xRng/5 else rVal 
 
 runningMedian = []
-
+timeInt = 0     
+#get rid of globals
 
 def pushToMed(x):
     runningMedian.append(round(x,1))
@@ -44,10 +43,23 @@ def median(input):
     sortedArray.sort()
     length = round(len(sortedArray)/2)
     return sortedArray[length]
-     
+
+def direcManager(time,interval):
+    if time == abs(interval):
+        time -= abs(interval)
+        
+        #better way to controll direction
+        if timeContoller < -2 and timeContoller != 1:
+            motor.onestep(direction=2)
+        else:
+            motor.onestep()
+            
+    
+
 
 
 while True:
+    timeInt +=1
     timeContoller = pushToMed(stepperAdditionMultiplier(pot.value,-10,10))
     # push the most recent value to runningMedian
     # pop the oldest from the front of runningMedian if there's more than some number of elements there
@@ -55,6 +67,5 @@ while True:
     
     print(f"smothedVal:{timeContoller} ")
 
-    time.sleep(.001 * abs(timeContoller))
-    motor.onestep() if timeContoller > 2 else motor.onestep(direction=2)
+    time.sleep(.001)
 
