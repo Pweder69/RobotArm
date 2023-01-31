@@ -25,13 +25,18 @@ motor = stepper.StepperMotor(coils[0], coils[1], coils[2], coils[3], microsteps=
 
 # QOL implement servoDef example code to make defintions better to change and understand.
 rotaServ = servo.Servo(pwmio.PWMOut(board.D0, duty_cycle=2 ** 15, frequency=50))
-armLeft  = servo.Servo(pwmio.PWMOut(board.D0, duty_cycle=2 ** 15, frequency=50))
-armRight = servo.Servo(pwmio.PWMOut(board.D0, duty_cycle=2 ** 15, frequency=50))
+armLeft  = servo.Servo(pwmio.PWMOut(board.D1, duty_cycle=2 ** 15, frequency=50))
+armRight = servo.Servo(pwmio.PWMOut(board.D2, duty_cycle=2 ** 15, frequency=50))
 
 
 def valMap(xPotentiometer,xRng,yRng):
-    rVal = simpleio.map_range(xPotentiometer,0,65535,xRng,yRng)
-    return 10 if rVal < .2 and rVal > -.2 else 1 if rVal < yRng/5 and rVal > xRng/5 else rVal 
+    if xPotentiometer < 65535/2:
+        rVal = simpleio.map_range(xPotentiometer,0,65535/2,-1,-10)
+        print("first")
+    else:
+        rVal = simpleio.map_range(xPotentiometer,65535/2,65535,10,1)
+    print(rVal)
+    return rVal
 
 runningMedian = []
 timeInt = 0     
@@ -46,7 +51,7 @@ def medianCalc(x):
     return median(runningMedian)
 
 def median(input):
-    sortedArray = input.deepcopy()
+    sortedArray = input.copy()
     sortedArray.sort()
     length = round(len(sortedArray)/2)
     return sortedArray[length]
@@ -55,15 +60,20 @@ def direcManager(interval):
     global timeInt
     time = timeInt
     #global because needs to change value
-    if time == abs(interval):
-        timeInt -= abs(interval)
-        
+    if time == abs(interval) or time == 10:
+        timeInt -= abs(math.floor(interval))
+        print("entered loop")
         #better way to controll direction
-        if timeContoller < -2 and timeContoller != 1:
+        if interval < -2:
             motor.onestep(direction=2)
-        else:
+            print("b")
+        elif interval > 2:
+            print("f")    
             motor.onestep() 
-      
+        else: 
+            print("stop")
+            pass
+
 prevState = 0     
 GrabClose = False      
 def Grab(buttonVal):
@@ -92,12 +102,14 @@ def Grab(buttonVal):
 
 while True:
     timeInt +=1
-    timeContoller = medianCalc(valMap(stpPot.value,-10,10))
+    timeContoller = medianCalc(valMap(stpPot.value,[-1,-10],[10,1]))
     # push the most recent value to runningMedian
     # pop the oldest from the front of runningMedian if there's more than some number of elements there
     # compute the median of runningMedian and store it in a var for this loop
     
-    print(f"smothedVal:{timeContoller} ")
-    direcManager(timeContoller)
-    time.sleep(.001)
+    #print(stpPot.value)
+    #print(timeInt)
+    #print(f"smothedVal:{timeContoller} ")
+    #direcManager(timeContoller)
+    time.sleep(.05)
 
