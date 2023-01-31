@@ -46,7 +46,7 @@ def medianCalc(x):
     return median(runningMedian)
 
 def median(input):
-    sortedArray = input.copy()
+    sortedArray = input.deepcopy()
     sortedArray.sort()
     length = round(len(sortedArray)/2)
     return sortedArray[length]
