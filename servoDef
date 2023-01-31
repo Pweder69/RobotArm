@@ -1,0 +1,14 @@
+import board
+import pwmio
+from adafruit_motor import servo
+
+SERVOPINS = {board.D5,board.D6,board.D7}
+#figure out if you can store hashed values instead of the method of board.
+
+
+SERVONAMES ={"rotaServ","armLeft,armRight"}
+
+
+for x in range(2):
+    pwm = pwmio.PWMOut(SERVOPINS,duty_cycle=2 ** 15, frequency=50)
+    SERVONAMES = servo.Servo(pwm)
