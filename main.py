@@ -18,7 +18,7 @@ coils =[
 for coil in coils:
     coil.direction = digitalio.Direction.OUTPUT
 
-stpPot = analogio.AnalogIn(board.A0)
+stpPot = analogio.AnalogIn(board.A1)
 
 
 motor = stepper.StepperMotor(coils[0], coils[1], coils[2], coils[3], microsteps=None)
@@ -30,12 +30,13 @@ armRight = servo.Servo(pwmio.PWMOut(board.D2, duty_cycle=2 ** 15, frequency=50))
 
 
 def valMap(xPotentiometer,xRng,yRng):
+    
+
     if xPotentiometer < 65535/2:
         rVal = simpleio.map_range(xPotentiometer,0,65535/2,-1,-10)
-        print("first")
     else:
         rVal = simpleio.map_range(xPotentiometer,65535/2,65535,10,1)
-    print(rVal)
+    
     return rVal
 
 runningMedian = []
@@ -56,23 +57,28 @@ def median(input):
     length = round(len(sortedArray)/2)
     return sortedArray[length]
 
+lastDirec = "n"
+
 def direcManager(interval):
+    global lastDirec
     global timeInt
     time = timeInt
+
+    #change condition for time to subtract thats were bugg is
     #global because needs to change value
-    if time == abs(interval) or time == 10:
+    if time > abs(interval) or time == 10:
         timeInt -= abs(math.floor(interval))
-        print("entered loop")
         #better way to controll direction
-        if interval < -2:
+        if interval >=-9 and interval <= -1:
             motor.onestep(direction=2)
-            print("b")
-        elif interval > 2:
-            print("f")    
+            lastDirec = "b"
+        elif interval <= 9 and interval >= 1:    
             motor.onestep() 
+            lastDirec = "f"
         else: 
-            print("stop")
-            pass
+            lastDirec = "s"
+    return lastDirec        
+    
 
 prevState = 0     
 GrabClose = False      
@@ -108,8 +114,9 @@ while True:
     # compute the median of runningMedian and store it in a var for this loop
     
     #print(stpPot.value)
-    #print(timeInt)
-    #print(f"smothedVal:{timeContoller} ")
-    #direcManager(timeContoller)
-    time.sleep(.05)
+    print(timeInt)
+    #print(f"smothedVal:{timeContoller} direc: {direcManager(timeContoller)} ")
+    direcManager(timeContoller)
+    
+    time.sleep(.1)
 
