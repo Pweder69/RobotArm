@@ -9,6 +9,9 @@ SERVOPINS = {board.D5,board.D6,board.D7}
 SERVONAMES ={"rotaServ","armLeft,armRight"}
 
 
-for x in range(2):
+'''for x in range(2):
     pwm = pwmio.PWMOut(SERVOPINS,duty_cycle=2 ** 15, frequency=50)
-    SERVONAMES = servo.Servo(pwm)
+    SERVONAMES = servo.Servo(pwm)'''
+
+while True:
+    print("works")

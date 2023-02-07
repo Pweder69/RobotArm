@@ -2,7 +2,7 @@ import time
 import math
 import simpleio
 import analogio
-import digitalio
+import DIo as DIo
 from adafruit_motor import stepper,servo
 import board
 import pwmio
@@ -10,13 +10,13 @@ from analogio import AnalogIn, AnalogOut
 
 
 coils =[
-    digitalio.DigitalInOut(board.D8),  # A1
-    digitalio.DigitalInOut(board.D9),  # A2
-    digitalio.DigitalInOut(board.D10),  # B1
-    digitalio.DigitalInOut(board.D11),  # B2
+    DIo.DigitalInOut(board.D8),  # A1
+    DIo.DigitalInOut(board.D9),  # A2
+    DIo.DigitalInOut(board.D10),  # B1
+    DIo.DigitalInOut(board.D11),  # B2
     ]
 for coil in coils:
-    coil.direction = digitalio.Direction.OUTPUT
+    coil.direction = DIo.Direction.OUTPUT
 
 stpPot = analogio.AnalogIn(board.A1)
 
@@ -24,9 +24,11 @@ stpPot = analogio.AnalogIn(board.A1)
 motor = stepper.StepperMotor(coils[0], coils[1], coils[2], coils[3], microsteps=None)
 
 # QOL implement servoDef example code to make defintions better to change and understand.
-rotaServ = servo.Servo(pwmio.PWMOut(board.D0, duty_cycle=2 ** 15, frequency=50))
-armLeft  = servo.Servo(pwmio.PWMOut(board.D1, duty_cycle=2 ** 15, frequency=50))
-armRight = servo.Servo(pwmio.PWMOut(board.D2, duty_cycle=2 ** 15, frequency=50))
+rotaServ = servo.Servo(pwmio.PWMOut(board.D7, duty_cycle=2 ** 15, frequency=50))
+armServ  = servo.Servo(pwmio.PWMOut(board.D6, duty_cycle=2 ** 15, frequency=50))
+btn = DIo.DigitalInOut(board.D5)
+btn.direction = DIo.Direction.INPUT
+btn.pull = DIo.Pull.UP
 
 
 def valMap(xPotentiometer,xRng,yRng):
@@ -69,10 +71,10 @@ def direcManager(interval):
     if time > abs(interval) or time == 10:
         timeInt -= abs(math.floor(interval))
         #better way to controll direction
-        if interval >=-9 and interval <= -1:
+        if interval >=-8.5 and interval <= -1:
             motor.onestep(direction=2)
             lastDirec = "b"
-        elif interval <= 9 and interval >= 1:    
+        elif interval <= 8.5 and interval >= 1:    
             motor.onestep() 
             lastDirec = "f"
         else: 
@@ -114,9 +116,9 @@ while True:
     # compute the median of runningMedian and store it in a var for this loop
     
     #print(stpPot.value)
-    print(timeInt)
-    #print(f"smothedVal:{timeContoller} direc: {direcManager(timeContoller)} ")
-    direcManager(timeContoller)
+    #print(timeInt)
+    print(f"smothedVal:{timeContoller} direc: {direcManager(timeContoller)} ")
+    #direcManager(timeContoller)
     
-    time.sleep(.1)
+    time.sleep(.005)
 
