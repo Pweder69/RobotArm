@@ -69,7 +69,7 @@ def direcManager(interval):
     #change condition for time to subtract thats were bugg is
     #global because needs to change value
     if time > abs(interval) or time == 10:
-        timeInt -= abs(math.floor(interval))
+        timeInt = 0
         #better way to controll direction
         if interval >=-8.5 and interval <= -1:
             motor.onestep(direction=2)
