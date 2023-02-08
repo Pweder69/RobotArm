@@ -2,7 +2,7 @@ import time
 import math
 import simpleio
 import analogio
-import DIo as DIo
+import digitalio as DIo
 from adafruit_motor import stepper,servo
 import board
 import pwmio

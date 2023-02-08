@@ -1,0 +1,57 @@
+import time
+import math
+import simpleio
+import analogio
+import digitalio as DIo
+from adafruit_motor import stepper,servo
+import board
+import pwmio
+from analogio import AnalogIn, AnalogOut 
+
+
+
+
+coils =[
+    DIo.DigitalInOut(board.D8),  # A1
+    DIo.DigitalInOut(board.D9),  # A2
+    DIo.DigitalInOut(board.D10),  # B1
+    DIo.DigitalInOut(board.D11),  # B2
+    ]
+for coil in coils:
+    coil.direction = DIo.Direction.OUTPUT
+
+stprPot = analogio.AnalogIn(board.A0)
+servoPot = analogio.AnalogIn(board.A1)
+
+
+motor = stepper.StepperMotor(coils[0], coils[1], coils[2], coils[3], microsteps=None)
+
+# QOL implement servoDef example code to make defintions better to change and understand.
+rotaServ = servo.Servo(pwmio.PWMOut(board.D7, duty_cycle=2 ** 15, frequency=50))
+armServ  = servo.Servo(pwmio.PWMOut(board.D6, duty_cycle=2 ** 15, frequency=50))
+btn = DIo.DigitalInOut(board.D5)
+btn.direction = DIo.Direction.INPUT
+btn.pull = DIo.Pull.UP
+
+
+deg= 1.1
+lastVal = 1
+
+
+while True:
+
+    print(f"Btn{btn.value} A1 {stprPot.value} A2 {servoPot.value} x:{deg}")
+    
+
+    if deg < 180 and lastVal < deg or deg == 1.1 or deg == 0:
+        deg = round(deg)
+        lastVal = deg
+        deg +=1  
+    else:
+        lastVal = deg
+        deg -=1
+    rotaServ.angle = deg 
+    armServ.angle = deg
+    
+
+    time.sleep(.02)
