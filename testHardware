@@ -31,6 +31,7 @@ rotaServ = servo.Servo(pwmio.PWMOut(board.D7, duty_cycle=2 ** 15, frequency=50))
 armServ  = servo.Servo(pwmio.PWMOut(board.D6, duty_cycle=2 ** 15, frequency=50))
 btn = digitalio.DigitalInOut(board.D5)
 btn.direction = digitalio.Direction.INPUT
+btn.pull = digitalio.Pull.DOWN
 
 
 

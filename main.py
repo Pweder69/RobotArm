@@ -18,8 +18,8 @@ coils =[
 for coil in coils:
     coil.direction = DIo.Direction.OUTPUT
 
-stpPot = analogio.AnalogIn(board.A1)
-
+stpPot = analogio.AnalogIn(board.A0)
+servPot = analogio.AnalogIn(board.A1)
 
 motor = stepper.StepperMotor(coils[0], coils[1], coils[2], coils[3], microsteps=None)
 
@@ -28,7 +28,7 @@ rotaServ = servo.Servo(pwmio.PWMOut(board.D7, duty_cycle=2 ** 15, frequency=50))
 armServ  = servo.Servo(pwmio.PWMOut(board.D6, duty_cycle=2 ** 15, frequency=50))
 btn = DIo.DigitalInOut(board.D5)
 btn.direction = DIo.Direction.INPUT
-btn.pull = DIo.Pull.UP
+btn.pull = DIo.Pull.DOWN
 
 
 def valMap(xPotentiometer,xRng,yRng):
@@ -85,40 +85,35 @@ def direcManager(interval):
 prevState = 0     
 GrabClose = False      
 def Grab(buttonVal):
-    btnOn = 1
-    # BtnOn is a placeHolder for the value witch represnts the button being on 
-    # because at the time of writing logic servos and buttons not implemented
     global prevState
     global GrabClose
 
-    if buttonVal == btnOn and buttonVal != prevState:
-        prevState = btnOn
-        not GrabClose
-        if GrabClose == True:
+    if buttonVal and buttonVal != prevState:
+        prevState = True
+        GrabClose = not GrabClose
+        if GrabClose:
             pass
             #code for servos to open 
         else:
             pass
             #code for servos to close  
-    elif buttonVal == 0:
-        prevState = 0
+    elif  not buttonVal:
+        prevState = False
+    return "open" if GrabClose == True else "close"
      
-    
-    
-
 
 
 while True:
     timeInt +=1
-    timeContoller = medianCalc(valMap(stpPot.value,[-1,-10],[10,1]))
+    stprbase = medianCalc(valMap(stpPot.value,[-1,-10],[10,1]))
+    
     # push the most recent value to runningMedian
     # pop the oldest from the front of runningMedian if there's more than some number of elements there
     # compute the median of runningMedian and store it in a var for this loop
     
     #print(stpPot.value)
     #print(timeInt)
-    print(f"smothedVal:{timeContoller} direc: {direcManager(timeContoller)} ")
+    print(f"stpr:{stprbase} base: {simpleio.map_range(servPot.value,0,65535,0,180) if simpleio.map_range(servPot.value,0,65535,0,180) not in range(70,90) else 90 } btn: {Grab(btn.value)}")
     #direcManager(timeContoller)
-    
     time.sleep(.005)
 
