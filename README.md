@@ -19,7 +19,7 @@ https://user-images.githubusercontent.com/112962227/221907679-4ad72246-8130-41ef
 Human inabillity to move heavy objects like a shipping crate efficiently.
 
 ## Smart Goal
-By February 31st we will have built a Robot arm that can move a minature shippng container in 3 different axis of motion. When me and Paul move the potentiometers it will go up or down and when we press the button the claw will grab.
+By March 10th we will have built a Robot arm that can move a minature shippng container in 3 different axis of motion. When me and Paul move the potentiometers it will go up or down and when we press the button the claw will grab.
 
 ## Orginal sketch designs 
 ![unnamed (1)](https://user-images.githubusercontent.com/112962227/221909583-b4812a45-8270-4bb2-bca7-dd40fa3ed047.jpg)
@@ -28,3 +28,15 @@ By February 31st we will have built a Robot arm that can move a minature shippng
 The top design was our earliest concept of the arm. We knew we wanted to do it so we were coming up with ideas of the claw and the moving base. We changed the claw from the top picture for simplicity but the design of the arm remained similar. The base (lower left) we stuck with, cleaning up the design a little, and for the model (bottom right) we had the same system of a screw motor, arm, moving base, but the thing we modified was the holder at the base of the arm to save materials.
 
 For the bottom design its much cleaner and we had a better pictre in our head of what we wanted it to look like. The design pretty much stayed the same as the bottom picture with only slight adjustments. One major change was the Arm shaft design turned into 2 pillars without a grove to save time and materials. 
+
+### Criteria
+- Be able to lift a crate
+- rotate 360 degrees
+- Materials: Acrylic, Arduino, Plastic (3D print), Arduino sheild, thick acrylic, Stepper motor, Servo motors, worm screw, button, potentiometer
+
+### Constraints
+- Materials (especially not having metal part to connect screw to stepper)
+- Time is a problem especially because of the time it takes to fabricate and also the designing proccess.
+- The need for some sturdy parts (metal)
+
+
