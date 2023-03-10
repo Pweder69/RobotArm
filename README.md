@@ -42,9 +42,24 @@ For the bottom design its much cleaner and we had a better pictre in our head of
 ## Problems and solutions 
 ### Problem #1
 -Friction fit joints not being tight enough to hold (especially for our project because its heavy) 
-### solution
+### Solution
 - For the solution I asked Mr. H for help and he told me to apply a 0.16mm thicken on each side instead of 0.8 which wasn't working for me the first time
 - *side note* the thick acrylic isn't 6.36mm it's more like 5.2mm for something to consider in friction fitting and for design in general.
 ![Screenshot 2023-03-09 9 26 24 PM](https://user-images.githubusercontent.com/112962227/224207791-4d8dc2de-40ca-42e0-ae4e-e34db5d60903.png)
+### Problem #2
+- The use of single screws as joints for T-slots so it acts as a rotating joint and creating a less strudy part
+- [example image]
+### Solution
+- I mostly had to reprint parts to include 2 screws to limit movement so I wish I had thought of it earlier. 
+### Problem #3 
+- This only happened to me once but to make sure to account for nuts and bolts (the nuts were a bigger problem for me)
+### solution
+- make an assembly and put all the nuts and bolts in their places to see if any parts need to be adjusted. 
+![Screenshot 2023-03-09 10 24 24 PM](https://user-images.githubusercontent.com/112962227/224216107-c763dadc-23d7-4424-bb5a-55187e41f26c.png)
+![Screenshot 2023-03-09 10 27 29 PM](https://user-images.githubusercontent.com/112962227/224216129-97964931-9295-43eb-828d-bba1562986fb.png)
 
+## Planning
+![Screenshot 2023-03-09 9 54 58 PM](https://user-images.githubusercontent.com/112962227/224216448-c4a5e8c4-28d0-42d7-9ec5-61374700cde5.png)
+This is our planning document from the beggining of the year. This planning shows how long projects can take and the importance of time management. For the research we completed on time and had little difficulty since we already had a good idea in our heads of what we wanted for our project. For the design I was way off in predicting to be done in January; I finished some time around now (March 5th-7th) just hammering our all the small errors near the end while having the frame and main parts in place by Febuary 10th-15th. For the manufacutring, I misjudged again, and we finished this around march 9th to 10th cutting the deadline close. For the code, we were off again, Paul did a good job of completing the code but finished a little later because of some problems and tangents but finished around March 3rd-6th. The takeaway from this information is to show the importance of planning and to make timely and realistic goals to not fall behind. Another thing is to focus on your goals because sometimes engineering can be easy to push off during the schiool year until the last minute so to stick to goals is to succeed
 
+## Reflection
