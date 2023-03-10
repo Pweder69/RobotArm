@@ -39,4 +39,12 @@ For the bottom design its much cleaner and we had a better pictre in our head of
 - Time is a problem especially because of the time it takes to fabricate and also the designing proccess.
 - The need for some sturdy parts (metal)
 
+## Problems and solutions 
+### Problem #1
+-Friction fit joints not being tight enough to hold (especially for our project because its heavy) 
+### solution
+- For the solution I asked Mr. H for help and he told me to apply a 0.16mm thicken on each side instead of 0.8 which wasn't working for me the first time
+- *side note* the thick acrylic isn't 6.36mm it's more like 5.2mm for something to consider in friction fitting and for design in general.
+![Screenshot 2023-03-09 9 26 24 PM](https://user-images.githubusercontent.com/112962227/224207791-4d8dc2de-40ca-42e0-ae4e-e34db5d60903.png)
+
 
