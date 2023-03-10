@@ -27,8 +27,8 @@ servoPot = analogio.AnalogIn(board.A1)
 motor = stepper.StepperMotor(coils[0], coils[1], coils[2], coils[3], microsteps=None)
 
 # QOL implement servoDef example code to make defintions better to change and understand.
-rotaServ = servo.Servo(pwmio.PWMOut(board.D7, duty_cycle=2 ** 15, frequency=50))
-armServ  = servo.Servo(pwmio.PWMOut(board.D6, duty_cycle=2 ** 15, frequency=50))
+rotaServ = servo.Servo(pwmio.PWMOut(board.D6, duty_cycle=2 ** 15, frequency=50))
+armServ  = servo.Servo(pwmio.PWMOut(board.D7, duty_cycle=2 ** 15, frequency=50))
 btn = digitalio.DigitalInOut(board.D5)
 btn.direction = digitalio.Direction.INPUT
 btn.pull = digitalio.Pull.DOWN
