@@ -114,6 +114,6 @@ while True:
     #print(stpPot.value)
     #print(timeInt)
     print(f"stpr:{stprbase} base: {simpleio.map_range(servPot.value,0,65535,0,180) if simpleio.map_range(servPot.value,0,65535,0,180) not in range(70,90) else 90 } btn: {Grab(btn.value)}")
-    #direcManager(timeContoller)
+    #direcManager(timeContoller) e
     time.sleep(.005)
 
