@@ -10,10 +10,9 @@ For our project me and Paul made a container moving robot arm. We decided to use
 ## Image 
 ![Screenshot 2023-02-20 7 23 57 PM](https://user-images.githubusercontent.com/112962227/220508171-789f33d6-3d0f-4e3b-8c73-03659eae5918.png)
 
-https://user-images.githubusercontent.com/112962227/221907679-4ad72246-8130-41ef-a95d-29a4b4bbcc13.MOV
-
 ![Screenshot 2023-02-20 9 37 31 PM](https://user-images.githubusercontent.com/112962227/220508196-492cb181-0eec-4735-85d5-0e812b9c224c.png)
 
+https://user-images.githubusercontent.com/112962227/221907679-4ad72246-8130-41ef-a95d-29a4b4bbcc13.MOV
 
 ## Problem to solve 
 Human inabillity to move heavy objects like a shipping crate efficiently.
