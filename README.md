@@ -73,8 +73,7 @@ This is our planning document from the beggining of the year. This planning show
 
 
 ## wiring diagram 
-![]
-
+![Alt text](media/main%20wire%20diagram%20robot%20arm_bb.png)
 ## Reflection
 This project was challenging and fun; it was the perfect difficulty for our class. One thing I learned for CAD was to better fasten and vizualize things in Onshape so that it was easier for the assembly. An example of this is including nuts and bolts (listed above) and to use differeny mates like the revolute mate (next to normal mate) other useful ones are slider, planar, parrallel, etc. Another thing I reflected on this project was the use of time; this project has taught me the importance of making realistic goals to complete a project efficiently and if I could do it again I would take more time setting goals. Additionally, picking out a project by listing all the ideas on a board and creating the pros and cons list really helped me pick out a project and to vizualize the best option to make sure you don't bite off more than you can chew. Lastly, this project has taguht me to be more thourough when checking for bugs before printing or cutting because this happened a few times where I had to reprint because of friction fitting or not accounting for a part. In conclusion, this projecct taught me alot about completing projects and trouble shooting for the future, it utilized my CAD skills and Pauls code skills tand was a very fun project to work on.
 
