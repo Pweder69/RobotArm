@@ -40,14 +40,14 @@ lastVal = 1
 
 
 
-for x in range(50):
-    motor.onestep()
-    print("innit")
-    time.sleep(.5)
+# for x in range(50):
+#     motor.onestep()
+#     print("innit")
+#     time.sleep(.5)
 
 while True:
 
-    print(f"Btn {btn.value} A1 {stprPot.value} A2 {servoPot.value} x:{deg}")
+    print(f"Btn {btn.value} A0 {stprPot.value} A1 {servoPot.value} x:{deg}")
     
 
     # if deg < 180 and lastVal < deg or deg == 1.1 or deg == 0:

@@ -74,10 +74,13 @@ def direcManager(interval):
         timeInt = 0
         #better way to controll direction
         if interval >=-8.5 and interval <= -1:
-            motor.onestep(direction=2)
+            for x in range(5):   
+                motor.onestep(direction=2)
+            
             lastDirec = "b"
-        elif interval <= 8.5 and interval >= 1:    
-            motor.onestep() 
+        elif interval <= 8.5 and interval >= 1: 
+            for x in range(5):   
+                motor.onestep() 
             lastDirec = "f"
         else: 
             lastDirec = "s"
@@ -95,10 +98,11 @@ def Grab(buttonVal):
         GrabClose = not GrabClose
         if GrabClose:
             pass
-            armServ.angle = 70
+            armServ.angle = 80
             #code for servos to open 
         else:
-            armServ.angle = 115
+            armServ.angle = 140
+
             pass
             #code for servos to close  
     elif  not buttonVal:
@@ -108,7 +112,7 @@ def Grab(buttonVal):
 
 
 while True:
-    timeInt +=1
+    timeInt +=2
     stprbase = medianCalc(valMap(stpPot.value,[-1,-10],[10,1]))
     
     # push the most recent value to runningMedian
@@ -119,7 +123,6 @@ while True:
     #print(timeInt)
     rotaServ.angle = simpleio.map_range(servPot.value,0,65535,0,180)
     
-    print(f"stpr:{stprbase} base: {simpleio.map_range(servPot.value,0,65535,0,180) if simpleio.map_range(servPot.value,0,65535,0,180) not in range(70,90) else 90 } btn: {Grab(btn.value)}")
-    direcManager(stprbase) 
+    print(f"stpr:{stprbase} direct: {direcManager(stprbase) } base: {simpleio.map_range(servPot.value,0,65535,0,180) if simpleio.map_range(servPot.value,0,65535,0,180) not in range(70,90) else 90 } btn: {Grab(btn.value)}")
     time.sleep(.005)
 
