@@ -24,9 +24,11 @@ servPot = analogio.AnalogIn(board.A1)
 motor = stepper.StepperMotor(coils[0], coils[1], coils[2], coils[3], microsteps=None)
 
 # QOL implement servoDef example code to make defintions better to change and understand.
-rotaServ = servo.Servo(pwmio.PWMOut(board.D7, duty_cycle=2 ** 15, frequency=50))
-armServ  = servo.Servo(pwmio.PWMOut(board.D6, duty_cycle=2 ** 15, frequency=50))
-btn = DIo.DigitalInOut(board.D5)
+rotaServ = servo.Servo(pwmio.PWMOut(board.D6 , duty_cycle=2 ** 15, frequency=50))
+armServ  = servo.Servo(pwmio.PWMOut(board.D7, duty_cycle=2 ** 15, frequency=50))
+armServ.angle = 70
+
+btn = DIo.DigitalInOut(board.D12)
 btn.direction = DIo.Direction.INPUT
 btn.pull = DIo.Pull.DOWN
 
@@ -83,7 +85,7 @@ def direcManager(interval):
     
 
 prevState = 0     
-GrabClose = False      
+GrabClose = True      
 def Grab(buttonVal):
     global prevState
     global GrabClose
@@ -93,8 +95,10 @@ def Grab(buttonVal):
         GrabClose = not GrabClose
         if GrabClose:
             pass
+            armServ.angle = 70
             #code for servos to open 
         else:
+            armServ.angle = 115
             pass
             #code for servos to close  
     elif  not buttonVal:
@@ -113,7 +117,9 @@ while True:
     
     #print(stpPot.value)
     #print(timeInt)
+    rotaServ.angle = simpleio.map_range(servPot.value,0,65535,0,180)
+    
     print(f"stpr:{stprbase} base: {simpleio.map_range(servPot.value,0,65535,0,180) if simpleio.map_range(servPot.value,0,65535,0,180) not in range(70,90) else 90 } btn: {Grab(btn.value)}")
-    #direcManager(timeContoller) e
+    direcManager(stprbase) 
     time.sleep(.005)
 
